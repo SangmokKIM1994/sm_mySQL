@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "yeong0319",
+    "password": "tkdahr45",
+    "database": "mozz_CRUD",
+    "host": "express-database.ccitz88tut9r.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
