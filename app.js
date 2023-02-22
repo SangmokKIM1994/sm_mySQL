@@ -1,3 +1,4 @@
+const cookieparser = require('cookie-parser')
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -5,6 +6,7 @@ const port = 3000;
 const router = require("./routes");
 
 app.use(express.json());
+app.use(cookieparser());
 app.use("/", router)
 
 app.listen(port, () => {
