@@ -8,6 +8,7 @@ class SignupController{
 
         const signupDate = await this.SignupService.Signup(nickname,password);
         
+        
         res.status(201).json({date : signupDate});
     } 
 }
