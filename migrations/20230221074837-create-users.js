@@ -17,9 +17,6 @@ module.exports = {
       password: {
         allowNull: false, // NOT NULL
         type: Sequelize.STRING
-      },
-      likepost:{
-        type: Sequelize.STRING // 5 15 10 //mysql에는 배열저장X
       },//배열을 저장가능 // sellect in << where 대신
       createdAt: {
         allowNull: false, // NOT NULL

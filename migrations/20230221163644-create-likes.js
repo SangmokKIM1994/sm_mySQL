@@ -3,28 +3,41 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('likes', {
-      id: {
+      likeId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
+      userId: {
+        allowNull: false, // NOT NULL
+        type: Sequelize.INTEGER,
+        unique: true, // UNIQUE
+        references: {
+          model: 'users', // Users 모델을 참조합니다.
+          key: 'userId', // Users 모델의 userId를 참조합니다.
+        },
+        onDelete: 'CASCADE', // 만약 Users 모델의 userId가 삭제되면, UserInfos 모델의 데이터가 삭제됩니다.
       },
-      content: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
+      postId: {
+        allowNull: false, // NOT NULL
+        type: Sequelize.INTEGER,
+        unique: true, // UNIQUE
+        references: {
+          model: 'posts', // Users 모델을 참조합니다.
+          key: 'postId', // Users 모델의 userId를 참조합니다.
+        },
+        onDelete: 'CASCADE', // 만약 Users 모델의 userId가 삭제되면, UserInfos 모델의 데이터가 삭제됩니다.
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: false, // NOT NULL
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now")
       },
       updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: false, // NOT NULL
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now")
       }
     });
   },
