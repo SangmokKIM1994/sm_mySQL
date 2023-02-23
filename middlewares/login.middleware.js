@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require("../models/users")
+const {users} = require("../models")
 
 module.exports = async (req, res, next) =>{
     const {Authorization} = req.cookies;
@@ -22,10 +22,10 @@ module.exports = async (req, res, next) =>{
     try{
         //authToken이 만료되었는지 확인
         //authToken이 서버가 발급한 토근이 맞는지 검증
-        const {Id} = jwt.verify(authToken,"customized-secret-key");
+        const {userId} = jwt.verify(authToken,"customized-secret-key");
 
         //authToken에 있는 userId에 해당하는 사용자가 실제 DB에 존재하는지 확인
-        const user = await User.findById(Id);
+        const user = await users.findByPk(userId);
         res.locals.user = user
 
         next(); //미들웨어 다음으로 보낸다.

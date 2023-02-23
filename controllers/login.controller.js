@@ -8,7 +8,6 @@ class LoginController {
         const {nickname, password} = req.body;
 
         const userData = await this.loginService.Login(nickname, password);
-        console.log(userData)
         
 
         // if(!userData ||userData.password !== password){

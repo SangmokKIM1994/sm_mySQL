@@ -31,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       allowNull: false, // NOT NULL
       type: DataTypes.INTEGER,
-      unique: true, // UNIQUE
       references: {
         model: 'users', // Users 모델을 참조합니다.
         key: 'userId', // Users 모델의 userId를 참조합니다.
@@ -41,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
     postId: {
       allowNull: false, // NOT NULL
       type: DataTypes.INTEGER,
-      unique: true, // UNIQUE
       references: {
         model: 'posts', // Users 모델을 참조합니다.
         key: 'postId', // Users 모델의 userId를 참조합니다.
