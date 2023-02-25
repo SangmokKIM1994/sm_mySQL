@@ -11,7 +11,9 @@ app.use(cookieparser());
 
 app.use("/", router)
 
-app.use(errorMiddleware);
+app.use((error, req, res, next) => {
+    return res.status(error.code||400).json({ message: error.message || "서버 에러."});
+});
 
 app.listen(port, () => {
     console.log(port, "포트로 서버가 열렸어요!")

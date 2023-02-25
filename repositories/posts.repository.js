@@ -1,3 +1,4 @@
+const { Databaseerror } = require('../error');
 const {posts,users,comments,sequelize} = require('../models');
 
 class PostsRepository {
@@ -50,7 +51,9 @@ class PostsRepository {
                 order:[["createdAt","DESC"]],
                 })
 
-                console.log(findPost)
+        if (!findPost){
+            throw new Databaseerror({message:"null값이 없음.",code:401})
+        }
 
         return findPost
     }
