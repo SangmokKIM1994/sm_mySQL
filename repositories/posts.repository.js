@@ -1,4 +1,4 @@
-const {posts,users} = require('../models');
+const {posts,users,comments,sequelize} = require('../models');
 
 class PostsRepository {
     createPosts = async(userId,title, content) =>{
@@ -16,13 +16,41 @@ class PostsRepository {
 
     getPosts = async() => {
 
-        const allPostsData = await posts.findAll()
+        const allPostsData = await posts.findAll({  
+            attributes: [   
+                "postId",
+                "title",
+                "content",
+                "userId",
+                "createdAt",
+                "updatedAt",
+                [sequelize.fn("COUNT", sequelize.col("comments.postId")),"commentsCount"]],
+                include: [  { model:users,attributes: ["nickname"]},
+                            { model:comments,attributes: []}],
+                group: ["posts.postId"],
+                order:[["createdAt","DESC"]],
+})
 
         return allPostsData
     }
 
     findOnePost = async(postId) => {
-        const findPost = await posts.findOne({where:{postId}})
+        const findPost = await posts.findOne({where:{postId},  
+            attributes: [   
+                "postId",
+                "title",
+                "content",
+                "UserId",
+                "createdAt",
+                "updatedAt",
+                [sequelize.fn("COUNT", sequelize.col("comments.postId")),"commentsCount"]],
+                include: [  { model:users,attributes: ["nickname"]},
+                            { model:comments,attributes: []}],
+                group: ["posts.postId"],
+                order:[["createdAt","DESC"]],
+                })
+
+                console.log(findPost)
 
         return findPost
     }

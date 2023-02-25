@@ -61,6 +61,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'CASCADE', // 만약 Users 모델의 userId가 삭제되면, UserInfos 모델의 데이터가 삭제됩니다.
     },
+    comment: {
+      allowNull: false, // NOT NULL
+      type: DataTypes.STRING,
+    },
     createdAt: {
       allowNull: false, // NOT NULL
       type: DataTypes.DATE,

@@ -12,18 +12,7 @@ class PostsService {
     getPosts = async() => {
         const allPostsData = await this.postsRepository.getPosts();
 
-        const all = allPostsData.map( post =>{
-            return{
-                postId : post.postId,
-                userId : post.userId,
-                nickname: post.nickname,
-                title:post.title,
-                createdAt:post.createdAt,
-                updatedAt:post.updatedAt
-            }
-        })
-
-        return all
+        return allPostsData
     }
 
     findOnePost = async(postId) => {
@@ -35,16 +24,16 @@ class PostsService {
             throw err;
         }
 
-        
-        return{
-            postId : findPostsData.postId,
-            userId : findPostsData.userId,
-            nickname: findPostsData.nickname,
-            title:findPostsData.title,
-            content:findPostsData.content,
-            createdAt:findPostsData.createdAt,
-            updatedAt:findPostsData.updatedAt
-        }
+        return findPostsData
+        // return{
+        //     postId : findPostsData.postId,
+        //     userId : findPostsData.userId,
+        //     nickname: findPostsData.nickname,
+        //     title:findPostsData.title,
+        //     content:findPostsData.content,
+        //     createdAt:findPostsData.createdAt,
+        //     updatedAt:findPostsData.updatedAt
+        // }
         
     }
 
