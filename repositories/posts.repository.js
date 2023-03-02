@@ -1,5 +1,5 @@
-const { Databaseerror } = require('../error');
 const {posts,users,comments,sequelize} = require('../models');
+const parseModelToFaltObjet = require("../helpers/parse.sequelize.helper.js");
 
 class PostsRepository {
     createPosts = async(userId,title, content) =>{
@@ -49,11 +49,10 @@ class PostsRepository {
                             { model:comments,attributes: []}],
                 group: ["posts.postId"],
                 order:[["createdAt","DESC"]],
-                })
+                raw:true
+                });
 
-        if (!findPost){
-            throw new Databaseerror({message:"null값이 없음.",code:401})
-        }
+        
 
         return findPost
     }
@@ -61,12 +60,10 @@ class PostsRepository {
     editPost = async(postId,userId,title, content) =>{
         const editPostData = await posts.update({title,content},{where:{postId,userId}})
 
-
         return editPostData
     }
 
     deletePost = async(userId,postId) => {
-
         const deletepost =  await posts.destroy({where: {postId,userId}})
         
         return deletepost

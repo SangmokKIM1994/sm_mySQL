@@ -1,4 +1,5 @@
 const PostsRepository = require('../repositories/posts.repository');
+const { Databaseerror } = require('../error');
 
 class PostsService {
     postsRepository = new PostsRepository();
@@ -18,10 +19,8 @@ class PostsService {
     findOnePost = async(postId) => {
         const findPostsData = await this.postsRepository.findOnePost(postId);
 
-        if(!findPostsData){
-            const err = new Error("게시글 조회에 실패하였습니다.")
-            err.name = "4"
-            throw err;
+        if (!findPostsData){
+            throw new Databaseerror({message:"null값이 없음.",code:401})
         }
 
         return findPostsData
